@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MindEcho - Sound Reminders</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@1.3.1/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/speech-commands@0.4.0/dist/speech-commands.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>MindEcho <span class="material-icons">hearing</span></h1>
+        <p>Sound Recognition Assistant</p>
+
+        <div class="controls">
+            <button id="enable-notifications" class="btn">
+                <span class="material-icons">notifications</span>
+                Enable Notifications
+            </button>
+            <button id="start-button" class="btn">
+                <span class="material-icons">mic</span>
+                Start Listening
+            </button>
+            <button id="test-notification" class="btn">
+                <span class="material-icons">notifications_active</span>
+                Test Notification
+            </button>
+        </div>
+
+        <div id="status">Status: Waiting to start...</div>
+        
+        <div class="detection-status">
+            <div class="confidence-bar">
+                <div class="confidence-fill"></div>
+                <span class="confidence-text">0%</span>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        // Check notification permission on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            if ('Notification' in window) {
+                const permission = await Notification.requestPermission();
+                notificationPermission = permission === 'granted';
+                console.log('Initial notification permission:', permission);
+            }
+        });
+    </script>
+</body>
+</html> 
